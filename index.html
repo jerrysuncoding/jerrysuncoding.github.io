@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Jerry Sun | Software Engineer</title>
+    <meta name="description" content="Software Engineer specializing in Java, Spring Boot, Python, and React." />
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap"
+        rel="stylesheet">
+
+    <!-- Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+
+    <!-- Noise overlay layer -->
+    <div class="noise-overlay"></div>
+
+    <!-- Dark/Light mode toggle -->
+    <div class="theme-toggle">
+        <button id="themeToggleBtn" class="toggle-btn" aria-label="Toggle dark/light mode">
+            <i data-lucide="sun" class="sun-icon"></i>
+            <i data-lucide="moon" class="moon-icon"></i>
+        </button>
+    </div>
+
+    <!-- Main container -->
+    <div class="container">
+
+        <!-- Header section -->
+        <header class="header">
+            <div class="status-badge">
+                <span class="ping-container">
+                    <span class="ping-effect"></span>
+                    <span class="ping-dot"></span>
+                </span>
+                <span id="statusText"></span>
+            </div>
+
+            <h1 class="main-title" id="name"></h1>
+
+            <p class="subtitle" id="bio"></p>
+
+            <div class="social-links">
+                <button onclick="copyEmail()" id="emailBtn" class="social-btn with-text">
+                    <i data-lucide="copy"></i>
+                    <span id="emailText"></span>
+                </button>
+
+                <a href="#" target="_blank" class="social-btn icon-only" id="githubLink">
+                    <i data-lucide="github"></i>
+                </a>
+                <a href="#" target="_blank" class="social-btn icon-only" id="linkedinLink">
+                    <i data-lucide="linkedin"></i>
+                </a>
+            </div>
+        </header>
+
+        <!-- Bento grid layout -->
+        <div class="bento-grid">
+
+            <!-- Latest Experience card (full width) -->
+            <div class="glass-card span-2">
+                <div class="gradient-overlay"></div>
+
+                <div class="card-content">
+                    <div class="card-header">
+                        <i data-lucide="briefcase" class="icon-accent"></i>
+                        <h2 class="card-title">Latest Experience</h2>
+                    </div>
+
+                    <div class="experience-info">
+                        <div class="experience-details">
+                            <h3 class="company-name" id="companyName"></h3>
+                            <div class="job-title" id="jobTitle"></div>
+                        </div>
+                        <span class="badge" id="workPeriod"></span>
+                    </div>
+
+                    <p class="description" id="jobDescription"></p>
+
+                    <div class="tags" id="workTechStack"></div>
+                </div>
+            </div>
+
+            <!-- Education card -->
+            <div class="glass-card">
+                <div class="card-header">
+                    <i data-lucide="graduation-cap" class="icon-accent"></i>
+                    <h2 class="card-title">Education</h2>
+                </div>
+                <div class="education-list" id="educationList"></div>
+            </div>
+
+            <!-- Featured Projects card -->
+            <div class="glass-card">
+                <div class="card-header">
+                    <i data-lucide="folder" class="icon-accent"></i>
+                    <h2 class="card-title">Featured Projects</h2>
+                </div>
+
+                <div class="projects-list" id="projectsList"></div>
+            </div>
+
+            <!-- Tech Stack card (full width, at bottom) -->
+            <div class="glass-card span-2">
+                <div class="card-header">
+                    <i data-lucide="code-2" class="icon-accent"></i>
+                    <h2 class="card-title">Skills</h2>
+                </div>
+                <div class="tech-stack-grid" id="techStackGrid"></div>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <p id="footerText"></p>
+        </footer>
+    </div>
+
+    <!-- Scripts -->
+    <script src="data.js"></script>
+    <script src="script.js"></script>
+</body>
+
+</html>

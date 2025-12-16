@@ -1,0 +1,784 @@
+/* ========================================
+   CSS VARIABLES (Theme Colors)
+   ======================================== */
+:root {
+    /* Dark mode colors (default) */
+    --bg-page: #020617;
+    --bg-card: rgba(15, 23, 42, 0.4);
+    --border-card: rgba(30, 41, 59, 0.6);
+
+    --text-main: #f1f5f9;
+    --text-sub: #94a3b8;
+    --text-muted: #64748b;
+
+    --accent: #14b8a6;
+    --accent-glow: #2dd4bf;
+    --accent-bg-sub: rgba(20, 184, 166, 0.1);
+    --accent-border: rgba(20, 184, 166, 0.5);
+
+    --grad-start: rgba(15, 23, 42, 0.8);
+    --grad-end: rgba(15, 23, 42, 0.4);
+
+    /* Fonts */
+    --font-sans: 'Inter', system-ui, -apple-system, "PingFang SC", "Microsoft YaHei", sans-serif;
+    --font-mono: 'JetBrains Mono', Consolas, monospace;
+}
+
+/* Light mode colors */
+body.light-mode {
+    --bg-page: #f8fafc;
+    --bg-card: rgba(255, 255, 255, 0.8);
+    --border-card: rgba(226, 232, 240, 0.8);
+
+    --text-main: #0f172a;
+    --text-sub: #475569;
+    --text-muted: #64748b;
+
+    --accent: #0d9488;
+    --accent-glow: #14b8a6;
+    --accent-bg-sub: rgba(20, 184, 166, 0.08);
+    --accent-border: rgba(20, 184, 166, 0.3);
+
+    --grad-start: rgba(241, 245, 249, 0.8);
+    --grad-end: rgba(248, 250, 252, 0.4);
+}
+
+/* ========================================
+   BASE RESET
+   ======================================== */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background-color: var(--bg-page);
+    color: var(--text-main);
+    font-family: var(--font-sans);
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+    min-height: 100vh;
+    transition: background-color 0.3s, color 0.3s;
+    overflow-x: hidden;
+    position: relative;
+}
+
+/* ========================================
+   NOISE OVERLAY (Fixed layer on top)
+   ======================================== */
+.noise-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 50;
+    opacity: 0.05;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+}
+
+/* ========================================
+   MAIN CONTAINER (Max width constraint)
+   ======================================== */
+.container {
+    max-width: 56rem;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 4rem 1rem;
+    position: relative;
+    z-index: 10;
+}
+
+@media (min-width: 640px) {
+    .container {
+        padding-left: 1.5rem;
+        padding-right: 1.5rem;
+    }
+}
+
+/* ========================================
+   BENTO GRID SYSTEM
+   ======================================== */
+.bento-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1rem;
+}
+
+@media (min-width: 768px) {
+    .bento-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .span-2 {
+        grid-column: span 2;
+    }
+
+    .experience-info {
+        flex-direction: row !important;
+        align-items: flex-start !important;
+    }
+}
+
+/* ========================================
+   GLASS CARD COMPONENT
+   ======================================== */
+.glass-card {
+    background-color: var(--bg-card);
+    border: 1px solid var(--border-card);
+    border-radius: 0.75rem;
+    padding: 1.5rem;
+    backdrop-filter: blur(8px);
+    transition: border-color 0.3s;
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+.glass-card:hover {
+    border-color: var(--accent-border);
+}
+
+.gradient-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to bottom right, var(--grad-start), var(--grad-end));
+    opacity: 0.5;
+    pointer-events: none;
+    z-index: 0;
+}
+
+.card-content {
+    position: relative;
+    z-index: 10;
+}
+
+/* ========================================
+   CARD HEADER
+   ======================================== */
+.card-header {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-bottom: 1.5rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid var(--border-card);
+}
+
+.card-title {
+    font-size: 0.875rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--text-sub);
+}
+
+.icon-accent {
+    color: var(--accent);
+    width: 20px;
+    height: 20px;
+}
+
+/* ========================================
+   BADGE COMPONENT
+   ======================================== */
+.badge {
+    display: inline-flex;
+    align-items: center;
+    padding: 0.25rem 0.625rem;
+    border-radius: 0.375rem;
+    font-size: 0.75rem;
+    font-weight: 500;
+    background-color: var(--bg-card);
+    border: 1px solid var(--border-card);
+    color: var(--text-muted);
+    white-space: nowrap;
+}
+
+/* ========================================
+   HEADER SECTION
+   ======================================== */
+.header {
+    text-align: center;
+    margin-bottom: 4rem;
+    animation: fadeIn 0.8s ease-out forwards;
+}
+
+.status-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.25rem 0.75rem;
+    border-radius: 9999px;
+    background-color: var(--accent-bg-sub);
+    border: 1px solid var(--accent-bg-sub);
+    color: var(--accent-glow);
+    font-size: 0.75rem;
+    font-weight: 500;
+    margin-bottom: 1.5rem;
+}
+
+.main-title {
+    font-size: 1.875rem;
+    line-height: 2.25rem;
+    font-weight: 700;
+    letter-spacing: -0.025em;
+    color: var(--text-main);
+    margin-bottom: 1.5rem;
+}
+
+@media (min-width: 640px) {
+    .main-title {
+        font-size: 2.25rem;
+        line-height: 2.5rem;
+    }
+}
+
+.subtitle {
+    font-size: 1.125rem;
+    line-height: 1.75rem;
+    color: var(--text-sub);
+    max-width: 42rem;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 2rem;
+}
+
+@media (min-width: 640px) {
+    .subtitle {
+        font-size: 1.25rem;
+    }
+}
+
+.subtitle span {
+    color: var(--text-main);
+    font-weight: 500;
+}
+
+.social-links {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    flex-wrap: wrap;
+}
+
+/* ========================================
+   SOCIAL BUTTON COMPONENT
+   ======================================== */
+.social-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    background-color: var(--bg-card);
+    border: 1px solid var(--border-card);
+    color: var(--text-sub);
+    border-radius: 9999px;
+    cursor: pointer;
+    transition: all 0.2s;
+    text-decoration: none;
+    font-family: var(--font-sans);
+}
+
+.social-btn.icon-only {
+    padding: 0.625rem;
+}
+
+.social-btn.with-text {
+    padding: 0.5rem 1rem;
+    font-size: 0.875rem;
+}
+
+.social-btn i {
+    width: 16px;
+    height: 16px;
+}
+
+.social-btn.icon-only i {
+    width: 20px;
+    height: 20px;
+}
+
+.social-btn:hover {
+    border-color: var(--accent-border);
+    color: var(--accent-glow);
+}
+
+.social-btn.copied {
+    border-color: #22c55e;
+    color: #22c55e;
+}
+
+/* ========================================
+   PING ANIMATION (Status indicator)
+   ======================================== */
+.ping-container {
+    position: relative;
+    display: flex;
+    height: 0.5rem;
+    width: 0.5rem;
+}
+
+.ping-effect {
+    position: absolute;
+    display: inline-flex;
+    height: 100%;
+    width: 100%;
+    border-radius: 9999px;
+    background-color: var(--accent);
+    opacity: 0.75;
+    animation: ping 1s cubic-bezier(0, 0, 0.2, 1) infinite;
+}
+
+.ping-dot {
+    position: relative;
+    display: inline-flex;
+    border-radius: 9999px;
+    height: 0.5rem;
+    width: 0.5rem;
+    background-color: var(--accent);
+}
+
+@keyframes ping {
+
+    75%,
+    100% {
+        transform: scale(2);
+        opacity: 0;
+    }
+}
+
+/* ========================================
+   EXPERIENCE SECTION
+   ======================================== */
+.experience-info {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    margin-bottom: 1rem;
+    gap: 0.5rem;
+}
+
+.experience-details {
+    flex: 1;
+}
+
+.company-name {
+    font-size: 1.25rem;
+    line-height: 1.75rem;
+    font-weight: 700;
+    color: var(--text-main);
+    margin-bottom: 0.25rem;
+}
+
+.job-title {
+    font-weight: 500;
+    color: var(--accent);
+}
+
+.description {
+    color: var(--text-sub);
+    font-size: 0.875rem;
+    line-height: 1.625;
+    max-width: 42rem;
+    margin-bottom: 1.5rem;
+}
+
+/* ========================================
+   TAGS (Tech stack badges)
+   ======================================== */
+.tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+}
+
+/* ========================================
+   EDUCATION SECTION
+   ======================================== */
+.education-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.education-item {
+    padding-left: 1rem;
+    border-left: 2px solid var(--border-card);
+}
+
+.school-name {
+    font-weight: 600;
+    color: var(--text-main);
+    font-size: 0.875rem;
+}
+
+.degree {
+    font-size: 0.75rem;
+    color: var(--accent);
+    margin-top: 0.125rem;
+}
+
+.education-period {
+    font-size: 0.75rem;
+    font-family: var(--font-mono);
+    color: var(--text-muted);
+    margin-top: 0.25rem;
+}
+
+/* ========================================
+   PROJECTS LIST (Vertical in single column)
+   ======================================== */
+.projects-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+/* ========================================
+   PROJECT CARD (Simplified for list view)
+   ======================================== */
+.project-card {
+    background-color: transparent;
+    border: 1px solid var(--border-card);
+    border-radius: 0.5rem;
+    padding: 1rem;
+    transition: all 0.2s;
+    display: flex;
+    flex-direction: column;
+}
+
+.project-card:hover {
+    background-color: var(--accent-bg-sub);
+    border-color: var(--accent-border);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+body.light-mode .project-card:hover {
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+}
+
+.project-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 0.75rem;
+}
+
+.project-icon {
+    padding: 0.5rem;
+    border-radius: 0.5rem;
+    background-color: var(--accent-bg-sub);
+    color: var(--accent-glow);
+    border: 1px solid var(--accent-border);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 2.5rem;
+    height: 2.5rem;
+    flex-shrink: 0;
+}
+
+body.light-mode .project-icon {
+    background-color: var(--accent-bg-sub);
+}
+
+.project-icon svg {
+    width: 20px;
+    height: 20px;
+}
+
+.project-link {
+    color: var(--text-muted);
+    transition: color 0.2s;
+    text-decoration: none;
+}
+
+.project-link:hover {
+    color: var(--accent-glow);
+}
+
+.project-link svg {
+    width: 16px;
+    height: 16px;
+}
+
+.project-title {
+    font-size: 1rem;
+    line-height: 1.5rem;
+    font-weight: 700;
+    color: var(--text-main);
+    margin-bottom: 0.5rem;
+}
+
+.project-description {
+    color: var(--text-sub);
+    font-size: 0.8125rem;
+    line-height: 1.5;
+    margin-bottom: 0.75rem;
+}
+
+.project-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.375rem;
+}
+
+.project-tags .badge {
+    font-size: 0.6875rem;
+    padding: 0.25rem 0.5rem;
+}
+
+body.light-mode .project-tags .badge {
+    background-color: rgba(0, 0, 0, 0.05);
+    border-color: rgba(0, 0, 0, 0.1);
+}
+
+/* ========================================
+   TECH STACK SECTION (2x2 GRID WITH SUBTLE DIVIDERS)
+   ======================================== */
+.tech-stack-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 2.5rem 3rem;
+    position: relative;
+}
+
+/* Subtle center dividers - vertical */
+.tech-stack-grid::before {
+    content: '';
+    position: absolute;
+    left: 50%;
+    top: 15%;
+    bottom: 15%;
+    width: 1px;
+    background: linear-gradient(to bottom,
+            transparent,
+            var(--border-card) 20%,
+            var(--border-card) 80%,
+            transparent);
+    transform: translateX(-50%);
+}
+
+/* Subtle center dividers - horizontal */
+.tech-stack-grid::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 15%;
+    right: 15%;
+    height: 1px;
+    background: linear-gradient(to right,
+            transparent,
+            var(--border-card) 20%,
+            var(--border-card) 80%,
+            transparent);
+    transform: translateY(-50%);
+}
+
+.tech-category {
+    display: flex;
+    flex-direction: column;
+    gap: 0.875rem;
+    position: relative;
+    z-index: 1;
+}
+
+.category-header {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.category-icon {
+    width: 18px;
+    height: 18px;
+    flex-shrink: 0;
+}
+
+/* Category icon colors matching badges */
+.category-icon.languages {
+    color: #a78bfa;
+}
+
+.category-icon.frontend {
+    color: #14b8a6;
+}
+
+.category-icon.backend {
+    color: #22c55e;
+}
+
+.category-icon.tools {
+    color: #fb923c;
+}
+
+.category-label {
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: var(--text-sub);
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+}
+
+.tech-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+}
+
+/* Colored tech badges with icons */
+.tech-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.375rem;
+    padding: 0.375rem 0.75rem;
+    border-radius: 0.375rem;
+    font-size: 0.8125rem;
+    font-weight: 500;
+    border: 1px solid;
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.tech-badge:hover {
+    transform: translateY(-1px);
+}
+
+.tech-badge svg {
+    width: 14px;
+    height: 14px;
+}
+
+/* Category-based colors (matching the reference image) */
+.tech-badge.languages {
+    background-color: rgba(139, 92, 246, 0.1);
+    border-color: rgba(139, 92, 246, 0.3);
+    color: #a78bfa;
+}
+
+.tech-badge.frontend {
+    background-color: rgba(20, 184, 166, 0.1);
+    border-color: rgba(20, 184, 166, 0.3);
+    color: #14b8a6;
+}
+
+.tech-badge.backend {
+    background-color: rgba(34, 197, 94, 0.1);
+    border-color: rgba(34, 197, 94, 0.3);
+    color: #22c55e;
+}
+
+.tech-badge.tools {
+    background-color: rgba(251, 146, 60, 0.1);
+    border-color: rgba(251, 146, 60, 0.3);
+    color: #fb923c;
+}
+
+/* Responsive: stack on mobile */
+@media (max-width: 767px) {
+    .tech-stack-grid {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+    }
+
+    .tech-stack-grid::before,
+    .tech-stack-grid::after {
+        display: none;
+    }
+}
+
+/* ========================================
+   FOOTER
+   ======================================== */
+.footer {
+    margin-top: 2rem;
+    padding-top: 1.5rem;
+    padding-bottom: 1.5rem;
+    border-top: 1px solid var(--border-card);
+    text-align: center;
+    color: var(--text-muted);
+    font-size: 0.75rem;
+}
+
+/* ========================================
+   THEME TOGGLE (Dark/Light Mode)
+   ======================================== */
+.theme-toggle {
+    position: fixed;
+    top: 1.5rem;
+    right: 1.5rem;
+    z-index: 100;
+}
+
+.toggle-btn {
+    width: 2.5rem;
+    height: 2.5rem;
+    border-radius: 9999px;
+    background-color: var(--bg-card);
+    backdrop-filter: blur(8px);
+    border: 1px solid var(--border-card);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s;
+    position: relative;
+}
+
+.toggle-btn:hover {
+    border-color: var(--accent-border);
+    transform: scale(1.05);
+}
+
+.toggle-btn svg {
+    width: 18px;
+    height: 18px;
+    color: var(--text-sub);
+    transition: all 0.3s;
+    position: absolute;
+}
+
+.sun-icon {
+    opacity: 0;
+    transform: rotate(180deg) scale(0);
+}
+
+.moon-icon {
+    opacity: 1;
+    transform: rotate(0deg) scale(1);
+}
+
+body.light-mode .sun-icon {
+    opacity: 1;
+    transform: rotate(0deg) scale(1);
+}
+
+body.light-mode .moon-icon {
+    opacity: 0;
+    transform: rotate(-180deg) scale(0);
+}
+
+/* ========================================
+   ANIMATIONS
+   ======================================== */
+.bento-grid {
+    animation: fadeIn 0.8s ease-out forwards;
+    animation-delay: 0.1s;
+    opacity: 0;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
