@@ -6,7 +6,7 @@ const portfolioData = {
     // Personal information
     personal: {
         name: "Jerry Sun",
-        email: "jerrysunsde@gmail.com",
+        email: "jerryjiayisun@gmail.com",
         status: "Open to Work",
         bio: "Full Stack Engineer specializing in robust <span>Java</span> backends and modern <span>React</span> interfaces."
     },
